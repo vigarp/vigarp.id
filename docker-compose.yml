@@ -30,4 +30,3 @@ services:
 networks:
   traefik_net:
     external: true
-

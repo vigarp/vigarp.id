@@ -14,11 +14,7 @@ const currentYear = new Date().getFullYear();
       <div
         class="flex flex-col items-center gap-1 text-center sm:flex-row sm:gap-3 sm:text-left"
       >
-        <span
-          >© {{ currentYear }} {{ appConfig.site.name }} ({{
-            appConfig.site.handle
-          }})</span
-        >
+        <span>© {{ currentYear }} {{ appConfig.site.handle }}</span>
         <span
           class="hidden text-zinc-400 dark:text-zinc-600 sm:inline"
           aria-hidden="true"

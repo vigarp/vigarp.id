@@ -4,6 +4,8 @@ export default defineAppConfig({
     handle: "vigarp",
     domain: "vigarp.id",
     title: "vigarp Digital Garden",
+    description:
+      "Software engineer focused on modern web architectures, backend systems, and self-hosted infrastructure.",
     tagline: "Software Engineer & Builder • Digital Garden",
     shortBio:
       "Software engineer focused on modern web architectures, backend systems, and self-hosted infrastructure.",

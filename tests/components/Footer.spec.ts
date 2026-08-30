@@ -7,7 +7,7 @@ describe("Footer.vue Component", () => {
     const component = await mountSuspended(Footer);
     const currentYear = new Date().getFullYear().toString();
     expect(component.text()).toContain(currentYear);
-    expect(component.text()).toContain("Vigar");
+    expect(component.text()).toContain("vigarp");
   });
 
   it("renders technology stack info", async () => {

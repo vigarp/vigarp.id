@@ -68,4 +68,3 @@ jobs:
             docker compose pull vigarp-web
             docker compose up -d vigarp-web
             docker image prune -f
-
