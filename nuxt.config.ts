@@ -4,6 +4,10 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   telemetry: false,
 
+  experimental: {
+    appManifest: false,
+  },
+
   modules: [
     "@nuxt/eslint",
     "@nuxtjs/tailwindcss",
@@ -59,11 +63,11 @@ export default defineNuxtConfig({
   },
 
   sitemap: {
-    exclude: ["/hub"],
+    exclude: ["/hub", "/links"],
   },
 
   robots: {
-    disallow: ["/hub", "/api/*"],
+    disallow: ["/hub", "/links", "/api/*"],
     sitemap: "https://vigarp.id/sitemap.xml",
   },
 
@@ -109,8 +113,20 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
     hubSecretPasscode: process.env.HUB_SECRET_PASSCODE || "123456",
+    hubServices: {
+      actualBudget:
+        process.env.HUB_ACTUAL_BUDGET_URL || "https://budget.vigarp.id",
+      beszelMonitor: process.env.HUB_BESZEL_URL || "https://beszel.vigarp.id",
+      traefikDashboard:
+        process.env.HUB_TRAEFIK_URL || "https://traefik.vigarp.id",
+      portainerManager:
+        process.env.HUB_PORTAINER_URL || "https://portainer.vigarp.id",
+    },
     public: {
       siteUrl: process.env.NUXT_PUBLIC_SITE_URL || "https://vigarp.id",
+      googleCalendarDirectUrl:
+        process.env.NUXT_PUBLIC_GOOGLE_CALENDAR_DIRECT_URL ||
+        "https://calendar.google.com/calendar/u/0/r?cid=MTM3NzgzMjA3Yzc3MGUxMTQ2YjUyNWFiNzZmZDY4NGM0ZjY5NjEzYjEyYjkwNzc4ZjFhMmQ3ODdkNWYxMTA0YkBncm91cC5jYWxlbmRhci5nb29nbGUuY29t",
     },
   },
 });

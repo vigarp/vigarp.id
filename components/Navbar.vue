@@ -20,7 +20,6 @@ function handleLogoClick() {
 
 const navLinks = [
   { name: "Blog", path: "/blog" },
-  { name: "Schedule", path: "/schedule" },
   { name: "Links", path: "/links" },
 ];
 </script>

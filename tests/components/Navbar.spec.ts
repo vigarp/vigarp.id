@@ -13,8 +13,8 @@ describe("Navbar.vue Component", () => {
   it("renders all public navigation links", async () => {
     const component = await mountSuspended(Navbar);
     expect(component.text()).toContain("Blog");
-    expect(component.text()).toContain("Schedule");
     expect(component.text()).toContain("Links");
+    expect(component.text()).not.toContain("Schedule");
   });
 
   it("contains the theme toggle button", async () => {

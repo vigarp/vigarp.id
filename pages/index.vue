@@ -106,34 +106,8 @@ const { data: recentArticles } = await useAsyncData("recent-articles", () =>
         Explore
       </h2>
 
-      <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <!-- Card 1: Schedule -->
-        <NuxtLink
-          to="/schedule"
-          class="group rounded-xl border border-zinc-200/80 bg-white p-5 transition-all duration-200 hover:border-zinc-300 hover:shadow-sm dark:border-zinc-800/80 dark:bg-zinc-900/50 dark:hover:border-zinc-700"
-        >
-          <div
-            class="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-blue-50 text-brand-600 dark:bg-blue-950/50 dark:text-brand-400"
-          >
-            <Icon
-              name="lucide:calendar-days"
-              class="h-5 w-5"
-              aria-hidden="true"
-            />
-          </div>
-          <h3
-            class="text-base font-bold text-zinc-900 transition-colors group-hover:text-brand-600 dark:text-zinc-100 dark:group-hover:text-brand-400"
-          >
-            Class Schedule
-          </h3>
-          <p
-            class="mt-1.5 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400"
-          >
-            Teaching calendar, mentoring availability, and academic agendas.
-          </p>
-        </NuxtLink>
-
-        <!-- Card 2: Public Links -->
+      <div class="grid gap-4 sm:grid-cols-2">
+        <!-- Card 1: Public Directory -->
         <NuxtLink
           to="/links"
           class="group rounded-xl border border-zinc-200/80 bg-white p-5 transition-all duration-200 hover:border-zinc-300 hover:shadow-sm dark:border-zinc-800/80 dark:bg-zinc-900/50 dark:hover:border-zinc-700"
@@ -151,31 +125,30 @@ const { data: recentArticles } = await useAsyncData("recent-articles", () =>
           <p
             class="mt-1.5 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400"
           >
-            Public shortcuts: Uptime Kuma, GitHub repositories, gists, and
-            links.
+            Developer profiles, academic calendar, GitHub gists, and curated
+            resources.
           </p>
         </NuxtLink>
 
-        <!-- Card 3: Private Hub -->
+        <!-- Card 2: Private Workspace -->
         <NuxtLink
           to="/hub"
-          class="group rounded-xl border border-zinc-200/80 bg-white p-5 transition-all duration-200 hover:border-zinc-300 hover:shadow-sm dark:border-zinc-800/80 dark:bg-zinc-900/50 dark:hover:border-zinc-700 sm:col-span-2 lg:col-span-1"
+          class="group rounded-xl border border-zinc-200/80 bg-white p-5 transition-all duration-200 hover:border-zinc-300 hover:shadow-sm dark:border-zinc-800/80 dark:bg-zinc-900/50 dark:hover:border-zinc-700"
         >
           <div
-            class="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-amber-50 text-amber-600 dark:bg-amber-950/50 dark:text-amber-400"
+            class="mb-3 flex h-9 w-9 items-center justify-center rounded-lg bg-zinc-100 text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300"
           >
-            <Icon name="lucide:shield" class="h-5 w-5" aria-hidden="true" />
+            <Icon name="lucide:lock" class="h-5 w-5" aria-hidden="true" />
           </div>
           <h3
-            class="text-base font-bold text-zinc-900 transition-colors group-hover:text-amber-600 dark:text-zinc-100 dark:group-hover:text-amber-400"
+            class="text-base font-bold text-zinc-900 transition-colors group-hover:text-brand-600 dark:text-zinc-100 dark:group-hover:text-brand-400"
           >
-            Private Command Hub
+            Private Workspace
           </h3>
           <p
             class="mt-1.5 text-xs leading-relaxed text-zinc-600 dark:text-zinc-400"
           >
-            PIN-protected access to Actual Budget and Beszel monitoring
-            dashboard.
+            Personal cloud tools and server monitoring dashboards.
           </p>
         </NuxtLink>
       </div>
