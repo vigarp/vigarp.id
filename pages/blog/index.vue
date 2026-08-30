@@ -86,7 +86,7 @@ function clearFilters() {
           placeholder="Search writings by keyword or tag..."
           class="w-full rounded-xl border border-zinc-200 bg-white py-2.5 pl-10 pr-4 text-sm text-zinc-900 placeholder-zinc-400 shadow-sm transition-all focus:border-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500/20 dark:border-zinc-800 dark:bg-zinc-900/60 dark:text-zinc-100 dark:placeholder-zinc-500"
           aria-label="Search writings"
-        >
+        />
         <button
           v-if="searchQuery"
           type="button"
@@ -122,7 +122,7 @@ function clearFilters() {
     </div>
 
     <!-- W3C Style Subtle Divider -->
-    <hr class="border-zinc-200 dark:border-zinc-800" aria-hidden="true" >
+    <hr class="border-zinc-200 dark:border-zinc-800" aria-hidden="true" />
 
     <!-- Articles Grid -->
     <div

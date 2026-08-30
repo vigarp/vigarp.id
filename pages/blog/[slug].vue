@@ -99,7 +99,7 @@ useSeoMeta({
       </main>
 
       <!-- W3C Style Subtle Divider -->
-      <hr class="border-zinc-200 dark:border-zinc-800" aria-hidden="true" >
+      <hr class="border-zinc-200 dark:border-zinc-800" aria-hidden="true" />
 
       <!-- Previous / Next Article Navigation -->
       <PrevNext :prev="prevArticle" :next="nextArticle" />

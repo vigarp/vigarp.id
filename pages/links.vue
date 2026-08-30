@@ -84,12 +84,12 @@ const publicLinks = computed<LinkItem[]>(() => [
       </h1>
       <p class="text-base text-zinc-700 sm:text-lg dark:text-zinc-300">
         Developer profiles, academic calendar, GitHub gists, and curated
-            resources.
+        resources.
       </p>
     </header>
 
     <!-- W3C Style Subtle Divider -->
-    <hr class="border-zinc-200 dark:border-zinc-800" aria-hidden="true" >
+    <hr class="border-zinc-200 dark:border-zinc-800" aria-hidden="true" />
 
     <!-- Links Grid -->
     <div class="grid gap-4 sm:grid-cols-2">

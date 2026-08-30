@@ -179,7 +179,7 @@ function lockWorkspace() {
       </header>
 
       <!-- W3C Style Subtle Divider -->
-      <hr class="border-zinc-200 dark:border-zinc-800" aria-hidden="true" >
+      <hr class="border-zinc-200 dark:border-zinc-800" aria-hidden="true" />
 
       <!-- Private Services Grid -->
       <div class="grid gap-4 sm:grid-cols-2">
@@ -269,7 +269,7 @@ function lockWorkspace() {
             if (pin.length === PIN_LENGTH) handleVerify(pin);
           }
         "
-      >
+      />
 
       <div
         class="w-full space-y-6 rounded-2xl border border-zinc-200/90 bg-white p-6 shadow-sm sm:p-8 dark:border-zinc-800/90 dark:bg-zinc-900/80"

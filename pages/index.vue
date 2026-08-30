@@ -40,7 +40,7 @@ const { data: recentArticles } = await useAsyncData("recent-articles", () =>
     </section>
 
     <!-- W3C Style Subtle Divider -->
-    <hr class="border-zinc-200 dark:border-zinc-800" aria-hidden="true" >
+    <hr class="border-zinc-200 dark:border-zinc-800" aria-hidden="true" />
 
     <!-- Recent Writings Section -->
     <section class="space-y-6" aria-labelledby="writings-heading">
@@ -95,7 +95,7 @@ const { data: recentArticles } = await useAsyncData("recent-articles", () =>
     </section>
 
     <!-- W3C Style Subtle Divider -->
-    <hr class="border-zinc-200 dark:border-zinc-800" aria-hidden="true" >
+    <hr class="border-zinc-200 dark:border-zinc-800" aria-hidden="true" />
 
     <!-- Explore & Services Directory Section -->
     <section class="space-y-6" aria-labelledby="explore-heading">
