@@ -25,6 +25,27 @@ export default defineNuxtConfig({
     download: true,
   },
 
+  content: {
+    highlight: {
+      theme: {
+        default: "github-light",
+        dark: "github-dark",
+      },
+      preload: [
+        "typescript",
+        "javascript",
+        "vue",
+        "bash",
+        "yaml",
+        "json",
+        "html",
+        "css",
+        "dockerfile",
+        "markdown",
+      ],
+    },
+  },
+
   features: {
     inlineStyles: true,
   },

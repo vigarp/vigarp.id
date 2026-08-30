@@ -35,3 +35,23 @@
     @apply inline-flex items-center gap-2 rounded-full border border-brand-600 bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:border-brand-700 hover:bg-brand-700 active:scale-95;
   }
 }
+
+/* Reset typography pre styles so ProsePre & Shiki control backgrounds and syntax colors */
+.prose pre {
+  background-color: transparent !important;
+  color: inherit !important;
+  margin: 0 !important;
+  padding: 1rem !important;
+  border-radius: 0 !important;
+}
+
+/* Shiki Dual Theme Token Colors */
+html:not(.dark) .shiki,
+html:not(.dark) .shiki span {
+  color: var(--shiki-default, inherit) !important;
+}
+
+html.dark .shiki,
+html.dark .shiki span {
+  color: var(--shiki-dark, inherit) !important;
+}
