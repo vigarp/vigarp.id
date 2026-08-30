@@ -1,0 +1,33 @@
+services:
+  vigarp-web:
+    image: ghcr.io/vigarp/vigarp.id:latest
+    container_name: vigarp-web
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+      - HOST=0.0.0.0
+      - PORT=3000
+      - NUXT_PUBLIC_SITE_URL=https://vigarp.id
+      - HUB_SECRET_PASSCODE=${HUB_SECRET_PASSCODE:-123456}
+    networks:
+      - traefik_net
+    labels:
+      - "traefik.enable=true"
+      # HTTP & HTTPS Routers
+      - "traefik.http.routers.vigarp.rule=Host(`vigarp.id`) || Host(`www.vigarp.id`)"
+      - "traefik.http.routers.vigarp.entrypoints=websecure"
+      - "traefik.http.routers.vigarp.tls=true"
+      - "traefik.http.routers.vigarp.tls.certresolver=letsencrypt"
+      # Service Port
+      - "traefik.http.services.vigarp.loadbalancer.server.port=3000"
+      # Security Headers
+      - "traefik.http.middlewares.vigarp-headers.headers.sslredirect=true"
+      - "traefik.http.middlewares.vigarp-headers.headers.stsSeconds=315360000"
+      - "traefik.http.middlewares.vigarp-headers.headers.stsIncludeSubdomains=true"
+      - "traefik.http.middlewares.vigarp-headers.headers.stsPreload=true"
+      - "traefik.http.routers.vigarp.middlewares=vigarp-headers"
+
+networks:
+  traefik_net:
+    external: true
+

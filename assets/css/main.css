@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-[#FAFAFA] text-zinc-900 antialiased selection:bg-brand-500/20 selection:text-brand-700 dark:bg-zinc-950 dark:text-zinc-100 dark:selection:bg-brand-500/30 dark:selection:text-brand-300;
+    min-height: 100vh;
+    font-family:
+      "Plus Jakarta Sans",
+      Inter,
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+}
+
+@layer components {
+  /* W3C inspired editorial hyperlink */
+  .w3c-link {
+    @apply font-medium text-brand-600 underline decoration-brand-500/40 underline-offset-4 transition-colors hover:text-brand-700 hover:decoration-brand-600 dark:text-brand-400 dark:hover:text-brand-300 dark:hover:decoration-brand-300;
+  }
+
+  /* Pill button with subtle border */
+  .btn-pill {
+    @apply inline-flex items-center gap-2 rounded-full border border-zinc-300 bg-white px-4 py-2 text-sm font-semibold text-zinc-800 shadow-sm transition-all hover:border-zinc-400 hover:bg-zinc-50 active:scale-95 dark:border-zinc-700 dark:bg-zinc-900 dark:text-zinc-200 dark:hover:border-zinc-600 dark:hover:bg-zinc-800;
+  }
+
+  .btn-pill-primary {
+    @apply inline-flex items-center gap-2 rounded-full border border-brand-600 bg-brand-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all hover:border-brand-700 hover:bg-brand-700 active:scale-95;
+  }
+}
