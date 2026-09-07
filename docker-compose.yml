@@ -1,5 +1,6 @@
 services:
   vigarp-web:
+    build: .
     image: ghcr.io/vigarp/vigarp.id:latest
     container_name: vigarp-web
     restart: unless-stopped
