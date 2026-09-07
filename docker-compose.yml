@@ -11,9 +11,10 @@ services:
       - NUXT_PUBLIC_SITE_URL=https://vigarp.id
       - HUB_SECRET_PASSCODE=${HUB_SECRET_PASSCODE:-123456}
     networks:
-      - traefik_net
+      - proxy
     labels:
       - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
       # HTTP & HTTPS Routers
       - "traefik.http.routers.vigarp.rule=Host(`vigarp.id`) || Host(`www.vigarp.id`)"
       - "traefik.http.routers.vigarp.entrypoints=websecure"
@@ -29,5 +30,5 @@ services:
       - "traefik.http.routers.vigarp.middlewares=vigarp-headers"
 
 networks:
-  traefik_net:
+  proxy:
     external: true
