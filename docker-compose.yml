@@ -8,8 +8,13 @@ services:
       - NODE_ENV=production
       - HOST=0.0.0.0
       - PORT=3000
-      - NUXT_PUBLIC_SITE_URL=https://vigarp.id
+      - NUXT_PUBLIC_SITE_URL=${NUXT_PUBLIC_SITE_URL:-https://vigarp.id}
+      - NUXT_HUB_SECRET_PASSCODE=${HUB_SECRET_PASSCODE:-123456}
       - HUB_SECRET_PASSCODE=${HUB_SECRET_PASSCODE:-123456}
+      - NUXT_HUB_SERVICES_ACTUAL_BUDGET=${HUB_ACTUAL_BUDGET_URL:-https://budget.vigarp.id}
+      - NUXT_HUB_SERVICES_BESZEL_MONITOR=${HUB_BESZEL_URL:-https://beszel.vigarp.id}
+      - NUXT_HUB_SERVICES_TRAEFIK_DASHBOARD=${HUB_TRAEFIK_URL:-https://traefik.vigarp.id}
+      - NUXT_HUB_SERVICES_PORTAINER_MANAGER=${HUB_PORTAINER_URL:-https://portainer.vigarp.id}
     networks:
       - proxy
     labels:

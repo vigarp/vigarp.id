@@ -59,7 +59,10 @@ export default defineEventHandler(async (event) => {
   const userPin = (body?.pin || "").trim();
 
   const secretPasscode = (
-    (config.hubSecretPasscode as string) || "123456"
+    (config.hubSecretPasscode as string) ||
+    process.env.NUXT_HUB_SECRET_PASSCODE ||
+    process.env.HUB_SECRET_PASSCODE ||
+    "123456"
   ).trim();
 
   if (!userPin || userPin !== secretPasscode) {
