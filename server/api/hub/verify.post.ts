@@ -30,58 +30,69 @@ export interface HubServiceItem {
 }
 
 export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig();
-  const ip =
-    getHeader(event, "x-forwarded-for")?.split(",")[0].trim() ||
-    event.node.req.socket.remoteAddress ||
-    "anonymous";
+  try {
+    const config = useRuntimeConfig();
+    const forwardedFor = getHeader(event, "x-forwarded-for");
+    const ip =
+      (typeof forwardedFor === "string" ? forwardedFor.split(",")[0].trim() : null) ||
+      event.node?.req?.socket?.remoteAddress ||
+      "anonymous";
 
-  const now = Date.now();
-  const record = attemptTracker.get(ip);
+    const now = Date.now();
+    const record = attemptTracker.get(ip);
 
-  // Clean expired lockout
-  if (record && now > record.resetAt) {
-    attemptTracker.delete(ip);
-  }
+    // Clean expired lockout
+    if (record && now > record.resetAt) {
+      attemptTracker.delete(ip);
+    }
 
-  // Check rate limit
-  const currentRecord = attemptTracker.get(ip);
-  if (currentRecord && currentRecord.count >= MAX_ATTEMPTS) {
-    const remainingSeconds = Math.ceil((currentRecord.resetAt - now) / 1000);
-    throw createError({
-      statusCode: 429,
-      statusMessage: `Too many failed attempts. Please retry in ${remainingSeconds}s.`,
-    });
-  }
+    // Check rate limit
+    const currentRecord = attemptTracker.get(ip);
+    if (currentRecord && currentRecord.count >= MAX_ATTEMPTS) {
+      const remainingSeconds = Math.ceil((currentRecord.resetAt - now) / 1000);
+      throw createError({
+        statusCode: 429,
+        statusMessage: `Too many failed attempts. Please retry in ${remainingSeconds}s.`,
+      });
+    }
 
-  const body = (await readBody<VerifyRequestBody>(event).catch(() => ({}))) as
-    VerifyRequestBody | undefined;
-  const userPin = (body?.pin || "").trim();
+    const body = (await readBody(event).catch(() => ({}))) as
+      | Record<string, unknown>
+      | undefined;
+    const userPin = String(body?.pin ?? "").trim();
 
-  const secretPasscode = (
-    (config.hubSecretPasscode as string) ||
-    process.env.NUXT_HUB_SECRET_PASSCODE ||
-    process.env.HUB_SECRET_PASSCODE ||
-    "123456"
-  ).trim();
+    const secretPasscode = String(
+      (config.hubSecretPasscode as string) ||
+      process.env.NUXT_HUB_SECRET_PASSCODE ||
+      process.env.HUB_SECRET_PASSCODE ||
+      ""
+    ).trim();
 
-  if (!userPin || userPin !== secretPasscode) {
-    const newCount = (currentRecord?.count || 0) + 1;
-    attemptTracker.set(ip, {
-      count: newCount,
-      resetAt: currentRecord?.resetAt || now + LOCKOUT_WINDOW_MS,
-    });
+    if (!secretPasscode) {
+      console.error("[Hub Security Alert]: HUB_SECRET_PASSCODE is not set in environment variables.");
+      throw createError({
+        statusCode: 500,
+        statusMessage: "Workspace security is not configured. Please set HUB_SECRET_PASSCODE in server environment.",
+      });
+    }
 
-    const remainingAttempts = Math.max(0, MAX_ATTEMPTS - newCount);
+    if (!userPin || userPin !== secretPasscode) {
+      const newCount = (currentRecord?.count || 0) + 1;
+      attemptTracker.set(ip, {
+        count: newCount,
+        resetAt: currentRecord?.resetAt || now + LOCKOUT_WINDOW_MS,
+      });
 
-    throw createError({
-      statusCode: 401,
-      statusMessage:
-        remainingAttempts > 0
-          ? `Invalid passcode. ${remainingAttempts} attempts remaining.`
-          : "Invalid passcode. Maximum attempts reached, temporarily locked.",
-    });
-  }
+      const remainingAttempts = Math.max(0, MAX_ATTEMPTS - newCount);
+
+      throw createError({
+        statusCode: 401,
+        statusMessage:
+          remainingAttempts > 0
+            ? `Invalid passcode. ${remainingAttempts} attempts remaining.`
+            : "Invalid passcode. Maximum attempts reached, temporarily locked.",
+      });
+    }
 
   // Successful authentication - reset failure tracker for this IP
   attemptTracker.delete(ip);
@@ -131,9 +142,20 @@ export default defineEventHandler(async (event) => {
     },
   ];
 
-  return {
-    success: true,
-    authenticatedAt: new Date().toISOString(),
-    services,
-  };
+    return {
+      success: true,
+      authenticatedAt: new Date().toISOString(),
+      services,
+    };
+  } catch (err: unknown) {
+    const h3Error = err as { statusCode?: number };
+    if (h3Error?.statusCode) {
+      throw err;
+    }
+    console.error("[Hub Verify Error]:", err);
+    throw createError({
+      statusCode: 500,
+      statusMessage: (err as Error)?.message || "Internal verification error",
+    });
+  }
 });

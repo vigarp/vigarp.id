@@ -112,7 +112,10 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
-    hubSecretPasscode: process.env.HUB_SECRET_PASSCODE || "123456",
+    hubSecretPasscode:
+      process.env.NUXT_HUB_SECRET_PASSCODE ||
+      process.env.HUB_SECRET_PASSCODE ||
+      "",
     hubServices: {
       actualBudget:
         process.env.HUB_ACTUAL_BUDGET_URL || "https://budget.vigarp.id",

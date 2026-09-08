@@ -86,7 +86,7 @@ cp .env.example .env
 | :--------------------------------------- | :-------------------------------- | :-------------------------------------------- |
 | `NUXT_PUBLIC_SITE_URL`                   | `https://vigarp.id`               | Canonical production site URL                 |
 | `NUXT_PUBLIC_GOOGLE_CALENDAR_DIRECT_URL` | `https://calendar.google.com/...` | Direct URL for Academic Class Calendar        |
-| `HUB_SECRET_PASSCODE`                    | `123456`                          | 6-digit passcode for Private Workspace access |
+| `HUB_SECRET_PASSCODE`                    | `None (Required)`                 | 6-digit passcode for Private Workspace access |
 | `HUB_ACTUAL_BUDGET_URL`                  | `https://budget.vigarp.id`        | URL for Actual Budget instance                |
 | `HUB_BESZEL_URL`                         | `https://beszel.vigarp.id`        | URL for Beszel Server Monitoring              |
 | `HUB_TRAEFIK_URL`                        | `https://traefik.vigarp.id`       | URL for Traefik Ingress Dashboard             |
