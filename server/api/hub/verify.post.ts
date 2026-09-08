@@ -4,7 +4,7 @@ interface RateLimitRecord {
 }
 
 interface VerifyRequestBody {
-  pin?: string;
+  pin?: string | number;
 }
 
 interface HubServicesConfig {
@@ -56,10 +56,16 @@ export default defineEventHandler(async (event) => {
       });
     }
 
-    const body = (await readBody(event).catch(() => ({}))) as
-      | Record<string, unknown>
+    const body = (await readBody<VerifyRequestBody>(event).catch(() => ({}))) as
+      | VerifyRequestBody
       | undefined;
-    const userPin = String(body?.pin ?? "").trim();
+    const rawPin = body?.pin;
+    let userPin = "";
+    if (typeof rawPin === "string") {
+      userPin = rawPin.trim();
+    } else if (typeof rawPin === "number") {
+      userPin = String(rawPin).trim();
+    }
 
     const secretPasscode = String(
       (config.hubSecretPasscode as string) ||
